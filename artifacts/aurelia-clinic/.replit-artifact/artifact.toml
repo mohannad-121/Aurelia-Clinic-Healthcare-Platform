@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Aurelia Clinic"
+description = "Premium bilingual healthcare website, Supabase-backed appointment scheduling, patient and doctor portals, and clinic administration CRM."
+version = "1.0.0"
+id = "artifacts/aurelia-clinic"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25212
+
+[services.development]
+run = "pnpm --filter @workspace/aurelia-clinic run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/aurelia-clinic", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/aurelia-clinic/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25212"
+BASE_PATH = "/"

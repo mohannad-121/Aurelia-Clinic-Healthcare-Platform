@@ -1,0 +1,1 @@
+- [Contract generation](contract-generation.md) — Orval query/path parameter export collisions must be resolved in the contract, not generated files.

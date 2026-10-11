@@ -1,36 +1,598 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
-  version: 0.1.0
-  description: API specification
+  version: 1.0.0
+  description: Aurelia Clinic administrative healthcare platform
 servers:
   - url: /api
-    description: Base API path
-tags:
-  - name: health
-    description: Health operations
 paths:
   /healthz:
     get:
       operationId: healthCheck
-      tags: [health]
-      summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
           content:
             application/json:
-              schema:
-                $ref: "#/components/schemas/HealthStatus"
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /clinic:
+    get:
+      operationId: getClinic
+      responses:
+        "200":
+          description: Published clinic content and configuration status
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ClinicSnapshot" }
+  /auth/me:
+    get:
+      operationId: getSession
+      responses:
+        "200":
+          description: Session
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Session" }
+  /auth/login:
+    post:
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/LoginInput" }
+      responses:
+        "200":
+          description: Logged in
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Session" }
+  /auth/register:
+    post:
+      operationId: register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/RegistrationInput" }
+      responses:
+        "200":
+          description: Registered; email verification may be required
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Session" }
+  /auth/logout:
+    post:
+      operationId: logout
+      responses:
+        "200":
+          description: Signed out
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Message" }
+  /auth/recover:
+    post:
+      operationId: recoverPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/RecoveryInput" }
+      responses:
+        "200":
+          description: Recovery requested
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Message" }
+  /auth/verify:
+    post:
+      operationId: verifyEmailLink
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/EmailLinkInput" }
+      responses:
+        "200":
+          description: Supabase email link session verified
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Session" }
+  /auth/password:
+    post:
+      operationId: setPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PasswordInput" }
+      responses:
+        "200":
+          description: Password set using Supabase Auth
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Message" }
+  /profile:
+    patch:
+      operationId: updateProfile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ProfileInput" }
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Profile" }
+  /availability:
+    get:
+      operationId: getAvailability
+      parameters:
+        - { name: service_id, in: query, required: true, schema: { type: string } }
+        - { name: doctor_id, in: query, schema: { type: string } }
+        - { name: date, in: query, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Real bookable slots
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Availability" }
+  /appointments:
+    get:
+      operationId: listAppointments
+      responses:
+        "200":
+          description: Authorized appointments
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/Appointment" } }
+    post:
+      operationId: createAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BookingInput" }
+      responses:
+        "201":
+          description: Persisted booking
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Appointment" }
+  /appointments/{id}:
+    patch:
+      operationId: updateAppointment
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AppointmentUpdate" }
+      responses:
+        "200":
+          description: Updated booking
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Appointment" }
+  /inquiries:
+    post:
+      operationId: createInquiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/InquiryInput" }
+      responses:
+        "201":
+          description: Inquiry saved
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Message" }
+  /waitlist:
+    post:
+      operationId: joinWaitlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/WaitlistInput" }
+      responses:
+        "201":
+          description: Waitlist request saved
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Message" }
+  /assistant:
+    post:
+      operationId: askAssistant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ChatInput" }
+      responses:
+        "200":
+          description: Grounded clinic assistance
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ChatReply" }
+  /dashboard/summary:
+    get:
+      operationId: getDashboardSummary
+      responses:
+        "200":
+          description: Live clinic operations
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/DashboardSummary" }
+  /manage/{resource}:
+    get:
+      operationId: listRecords
+      parameters:
+        - { $ref: "#/components/parameters/Resource" }
+      responses:
+        "200":
+          description: Authorized resource records
+          content:
+            application/json:
+              schema: { type: array, items: { $ref: "#/components/schemas/ResourceRecord" } }
+    post:
+      operationId: createRecord
+      parameters:
+        - { $ref: "#/components/parameters/Resource" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/RecordInput" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ResourceRecord" }
+  /manage/{resource}/{id}:
+    patch:
+      operationId: updateRecord
+      parameters:
+        - { $ref: "#/components/parameters/Resource" }
+        - { name: id, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/RecordInput" }
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ResourceRecord" }
+    delete:
+      operationId: deleteRecord
+      parameters:
+        - { $ref: "#/components/parameters/Resource" }
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Archived or deleted
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Message" }
+  /media:
+    post:
+      operationId: uploadMedia
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MediaInput" }
+      responses:
+        "201":
+          description: Stored in Supabase Storage
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MediaResult" }
 components:
+  parameters:
+    Resource:
+      name: resource
+      in: path
+      required: true
+      schema:
+        type: string
+        enum: [patients, leads, tasks, doctors, services, schedules, exceptions, staff, content, faqs, posts, testimonials, settings, audit, interactions, notes, tags, branches, waitlist, notifications, templates, schedule_requests]
   schemas:
     HealthStatus:
       type: object
+      required: [status]
       properties:
-        status:
-          type: string
-      required:
-        - status
-
+        status: { type: string }
+    Message:
+      type: object
+      required: [message]
+      properties:
+        message: { type: string }
+    ClinicSettings:
+      type: object
+      required: [id, name, headline, description, timezone, currency, email, phone, address, hours, cancellation_hours, approval_required]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        headline: { type: string }
+        description: { type: string }
+        timezone: { type: string }
+        currency: { type: string }
+        email: { type: string }
+        phone: { type: string }
+        address: { type: string }
+        hours: { type: string }
+        logo_url: { type: string }
+        cancellation_hours: { type: integer }
+        approval_required: { type: boolean }
+    Service:
+      type: object
+      required: [id, name, slug, description, specialty, duration_minutes, price, is_demo, published]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        name_ar: { type: string }
+        slug: { type: string }
+        description: { type: string }
+        description_ar: { type: string }
+        specialty: { type: string }
+        duration_minutes: { type: integer }
+        price: { type: number }
+        icon: { type: string }
+        is_demo: { type: boolean }
+        published: { type: boolean }
+    Doctor:
+      type: object
+      required: [id, name, specialty, biography, service_ids, is_demo, published]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        name_ar: { type: string }
+        specialty: { type: string }
+        biography: { type: string }
+        biography_ar: { type: string }
+        image_url: { type: string }
+        languages: { type: string }
+        service_ids: { type: array, items: { type: string } }
+        is_demo: { type: boolean }
+        published: { type: boolean }
+    Faq:
+      type: object
+      required: [id, question, answer, published]
+      properties:
+        id: { type: string }
+        question: { type: string }
+        answer: { type: string }
+        question_ar: { type: string }
+        answer_ar: { type: string }
+        published: { type: boolean }
+    Content:
+      type: object
+      required: [id, title, slug, body, published]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        title_ar: { type: string }
+        slug: { type: string }
+        body: { type: string }
+        body_ar: { type: string }
+        excerpt: { type: string }
+        image_url: { type: string }
+        published: { type: boolean }
+    ClinicSnapshot:
+      type: object
+      required: [configured, mode, settings, services, doctors, faqs, posts, content, testimonials]
+      properties:
+        configured: { type: boolean }
+        mode: { type: string, enum: [live, setup] }
+        settings: { $ref: "#/components/schemas/ClinicSettings" }
+        services: { type: array, items: { $ref: "#/components/schemas/Service" } }
+        doctors: { type: array, items: { $ref: "#/components/schemas/Doctor" } }
+        faqs: { type: array, items: { $ref: "#/components/schemas/Faq" } }
+        posts: { type: array, items: { $ref: "#/components/schemas/Content" } }
+        content: { type: array, items: { $ref: "#/components/schemas/Content" } }
+        testimonials: { type: array, items: { $ref: "#/components/schemas/ResourceRecord" } }
+    Profile:
+      type: object
+      required: [id, name, email, phone, role, communication_preference, consent]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string }
+        phone: { type: string }
+        role: { type: string, enum: [super_admin, clinic_admin, receptionist, doctor, patient] }
+        communication_preference: { type: string, enum: [email, phone, none] }
+        consent: { type: boolean }
+        doctor_id: { type: string }
+    Session:
+      type: object
+      required: [authenticated, configured]
+      properties:
+        authenticated: { type: boolean }
+        configured: { type: boolean }
+        profile: { $ref: "#/components/schemas/Profile" }
+        message: { type: string }
+    LoginInput:
+      type: object
+      required: [email, password]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string, minLength: 8, maxLength: 128 }
+    RegistrationInput:
+      type: object
+      required: [email, password, name, phone, consent]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string, minLength: 12, maxLength: 128 }
+        name: { type: string, minLength: 2, maxLength: 120 }
+        phone: { type: string, minLength: 7, maxLength: 30 }
+        consent: { type: boolean }
+    RecoveryInput:
+      type: object
+      required: [email]
+      properties:
+        email: { type: string, format: email }
+    EmailLinkInput:
+      type: object
+      required: [access_token, refresh_token]
+      properties:
+        access_token: { type: string, minLength: 20, maxLength: 8000 }
+        refresh_token: { type: string, minLength: 10, maxLength: 8000 }
+    PasswordInput:
+      type: object
+      required: [password]
+      properties:
+        password: { type: string, minLength: 12, maxLength: 128 }
+    ProfileInput:
+      type: object
+      properties:
+        name: { type: string, minLength: 2, maxLength: 120 }
+        phone: { type: string, minLength: 7, maxLength: 30 }
+        communication_preference: { type: string, enum: [email, phone, none] }
+        consent: { type: boolean }
+    Slot:
+      type: object
+      required: [doctor_id, doctor_name, starts_at, ends_at]
+      properties:
+        doctor_id: { type: string }
+        doctor_name: { type: string }
+        starts_at: { type: string }
+        ends_at: { type: string }
+    Availability:
+      type: object
+      required: [configured, timezone, slots]
+      properties:
+        configured: { type: boolean }
+        timezone: { type: string }
+        slots: { type: array, items: { $ref: "#/components/schemas/Slot" } }
+        message: { type: string }
+    Appointment:
+      type: object
+      required: [id, reference, patient_id, patient_name, doctor_id, doctor_name, service_id, service_name, starts_at, ends_at, status, notes, created_at]
+      properties:
+        id: { type: string }
+        reference: { type: string }
+        patient_id: { type: string }
+        patient_name: { type: string }
+        patient_email: { type: string }
+        patient_phone: { type: string }
+        doctor_id: { type: string }
+        doctor_name: { type: string }
+        service_id: { type: string }
+        service_name: { type: string }
+        starts_at: { type: string }
+        ends_at: { type: string }
+        status: { type: string, enum: [pending, confirmed, checked_in, in_progress, completed, cancelled, no_show] }
+        notes: { type: string }
+        created_at: { type: string }
+    BookingInput:
+      type: object
+      required: [service_id, doctor_id, starts_at, consent]
+      properties:
+        service_id: { type: string }
+        doctor_id: { type: string }
+        starts_at: { type: string }
+        patient_id: { type: string }
+        notes: { type: string, maxLength: 1000 }
+        consent: { type: boolean }
+    AppointmentUpdate:
+      type: object
+      properties:
+        status: { type: string, enum: [pending, confirmed, checked_in, in_progress, completed, cancelled, no_show] }
+        starts_at: { type: string }
+        doctor_id: { type: string }
+    InquiryInput:
+      type: object
+      required: [name, email, phone, message, consent]
+      properties:
+        name: { type: string, minLength: 2, maxLength: 120 }
+        email: { type: string, format: email }
+        phone: { type: string, minLength: 7, maxLength: 30 }
+        message: { type: string, minLength: 5, maxLength: 2000 }
+        consent: { type: boolean }
+        website: { type: string, maxLength: 0 }
+    WaitlistInput:
+      type: object
+      required: [service_id, date]
+      properties:
+        service_id: { type: string }
+        doctor_id: { type: string }
+        date: { type: string }
+    ChatInput:
+      type: object
+      required: [message]
+      properties:
+        message: { type: string, minLength: 1, maxLength: 1500 }
+        locale: { type: string, enum: [en, ar] }
+        save_conversation: { type: boolean }
+        session_id: { type: string }
+    ChatLink:
+      type: object
+      required: [label, href]
+      properties:
+        label: { type: string }
+        href: { type: string }
+    ChatReply:
+      type: object
+      required: [reply, mode, links]
+      properties:
+        reply: { type: string }
+        mode: { type: string, enum: [ai, faq] }
+        links: { type: array, items: { $ref: "#/components/schemas/ChatLink" } }
+        session_id: { type: string }
+    ResourceRecord:
+      type: object
+      required: [id, data]
+      properties:
+        id: { type: string }
+        data: { type: object, additionalProperties: true }
+    RecordInput:
+      type: object
+      required: [data]
+      properties:
+        data: { type: object, additionalProperties: true }
+    DashboardSummary:
+      type: object
+      required: [total_patients, new_patients, today_appointments, upcoming_appointments, pending_appointments, completed_appointments, cancelled_appointments, no_show_appointments, new_inquiries, conversion_rate, weekly, services, utilization, activity]
+      properties:
+        total_patients: { type: integer }
+        new_patients: { type: integer }
+        today_appointments: { type: integer }
+        upcoming_appointments: { type: integer }
+        pending_appointments: { type: integer }
+        completed_appointments: { type: integer }
+        cancelled_appointments: { type: integer }
+        no_show_appointments: { type: integer }
+        new_inquiries: { type: integer }
+        conversion_rate: { type: number }
+        weekly: { type: array, items: { $ref: "#/components/schemas/Metric" } }
+        services: { type: array, items: { $ref: "#/components/schemas/Metric" } }
+        utilization: { type: array, items: { $ref: "#/components/schemas/Metric" } }
+        activity: { type: array, items: { $ref: "#/components/schemas/ResourceRecord" } }
+    Metric:
+      type: object
+      required: [label, value]
+      properties:
+        label: { type: string }
+        value: { type: number }
+    MediaInput:
+      type: object
+      required: [filename, content_type, base64]
+      properties:
+        filename: { type: string, maxLength: 120 }
+        content_type: { type: string, enum: [image/jpeg, image/png, image/webp] }
+        base64: { type: string, maxLength: 4000000 }
+    MediaResult:
+      type: object
+      required: [url, path]
+      properties:
+        url: { type: string }
+        path: { type: string }

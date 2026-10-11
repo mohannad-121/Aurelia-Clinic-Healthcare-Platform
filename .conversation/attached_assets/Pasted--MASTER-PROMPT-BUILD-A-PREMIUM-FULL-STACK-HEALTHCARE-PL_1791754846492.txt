@@ -1,0 +1,1052 @@
+# MASTER PROMPT — BUILD A PREMIUM FULL-STACK HEALTHCARE PLATFORM
+
+## PROJECT: AURELIA CLINIC — PREMIUM DIGITAL HEALTHCARE EXPERIENCE
+
+You are a world-class senior full-stack engineer, SaaS architect, healthcare product designer, and award-winning creative UI/UX director.
+
+Your mission is to design and develop a **complete, production-oriented, exceptionally beautiful healthcare website and clinic management ecosystem**.
+
+This must NOT look or behave like a basic clinic website, a generic React dashboard, a standard healthcare template, or an AI-generated landing page.
+
+We are building a premium digital healthcare product combining:
+
+- A luxury public-facing healthcare website
+- A complete online appointment booking engine
+- A patient portal
+- A fully functional internal CRM
+- A clinic operations and administration dashboard
+- A doctor and staff management system
+- An intelligent website-aware AI assistant
+- A secure Supabase-powered backend
+- A unified healthcare business management experience
+
+The final product must feel like an expensive, professionally designed healthcare SaaS platform built by a high-end digital agency.
+
+**This is a functional full-stack software project, not a design mockup.**
+
+---
+
+# 1. CRITICAL DATABASE AND AUTHENTICATION RULES
+
+THIS SECTION IS NON-NEGOTIABLE.
+
+**USE SUPABASE AS THE EXCLUSIVE DATABASE AND AUTHENTICATION PLATFORM.**
+
+Do not use Clerk.
+
+Do not use Clerk for authentication, database functionality, user storage, or user management.
+
+Do not use Replit's built-in database, Neon, Firebase, SQLite, or another database provider.
+
+Required infrastructure:
+
+- Supabase PostgreSQL for persistent data
+- Supabase Auth for authentication
+- Supabase Storage where file uploads are required
+- PostgreSQL Row Level Security (RLS)
+- Secure server-side database operations
+- Environment variables for all credentials and secrets
+- SQL migrations for database schema management
+
+All appointments, patient profiles, CRM records, doctor schedules, staff accounts, website content, chat sessions, and operational data must persist in Supabase.
+
+Connect using environment variables such as:
+
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY` (server-side only)
+- `OPENAI_API_KEY` or a configurable AI provider key
+- `APP_URL`
+
+Never expose privileged credentials in frontend code.
+
+Never hardcode API keys.
+
+If Supabase credentials are not yet available, prepare the complete integration and migrations, and clearly identify the required environment variables. Do not quietly replace Supabase with another database.
+
+Use real backend operations and secure API authorization. Do not simulate persistence through localStorage or temporary mock arrays.
+
+---
+
+# 2. BRAND IDENTITY AND VISUAL DIRECTION
+
+Temporary brand name: **AURELIA CLINIC**.
+
+The name, logo, services, and clinic information must be configurable from the admin dashboard.
+
+This is a general healthcare clinic, not a dental-only or specialty-specific practice.
+
+## Design objective
+
+Create a truly luxurious, futuristic yet trustworthy healthcare experience.
+
+Think:
+
+- Premium healthcare meets Apple-level product design
+- High-end editorial web design
+- Modern European private medical clinics
+- Award-winning SaaS dashboard interfaces
+- Minimalistic Swiss typography
+- Smooth, intentional motion design
+- Beautiful whitespace and architectural composition
+
+### Strict color palette
+
+Primary brand colors:
+
+- Deep Medical Navy: `#102D69`
+- Premium Royal Blue: `#1263DF`
+- Vibrant Accent Blue: `#1686FF`
+- Ice Blue: `#EAF5FF`
+- Pure White: `#FFFFFF`
+- Pearl Background: `#F7FAFE`
+- Dark Text: `#14233F`
+
+Use white as the dominant background.
+
+Blue must create a strong premium brand identity through headlines, buttons, decorative details, cards, iconography, and selected sections.
+
+Use large navy headlines, sophisticated subtle gradients, and elegant bright surfaces.
+
+Do not make the entire website dark.
+
+### Typography
+
+Use premium modern typography such as:
+
+- Plus Jakarta Sans
+- Manrope
+- Inter
+- Outfit
+
+For Arabic, use a polished Arabic typeface such as IBM Plex Sans Arabic.
+
+Use bold, distinctive, beautifully spaced display typography.
+
+Avoid small, generic landing-page headings.
+
+### Visual details
+
+Include:
+
+- Large editorial typography
+- Beautiful asymmetric compositions
+- Sophisticated grid layouts
+- Tasteful frosted-glass UI
+- Soft shadows and elevated surfaces
+- Smooth blue gradient lighting
+- Rounded architectural cards
+- Elegant SVG line details
+- Decorative medical-inspired patterns
+- Premium photography and imagery
+- Beautiful outlined icons
+- Carefully designed hover states
+- Subtle animated backgrounds
+- Excellent mobile layout composition
+
+Avoid excessive floating bubbles, generic AI-looking neon effects, cheap stock-photo layouts, and overdecorated interfaces.
+
+Every section must have its own composition while maintaining consistent brand identity.
+
+---
+
+# 3. PREMIUM MOTION AND INTERACTIONS
+
+Use Framer Motion or Motion for React where appropriate.
+
+Implement:
+
+- Smooth page transitions
+- Elegant scroll-triggered reveals
+- Staggered typography animations
+- Premium hover transitions
+- Subtle parallax effects
+- Smooth animated counters
+- Interactive cards
+- Animated booking progress
+- Seamless dropdowns and modals
+- Refined loading skeletons
+- Beautiful toast notifications
+- Smooth dashboard navigation
+- Animated charts
+- Accessible microinteractions
+
+Motion should feel polished and expensive, not distracting.
+
+Maintain high performance.
+
+Respect reduced-motion accessibility preferences.
+
+---
+
+# 4. COMPLETE PUBLIC WEBSITE
+
+Build an actual multi-page website, not one long landing page.
+
+Required public pages:
+
+1. Home
+2. About the Clinic
+3. Our Services
+4. Service Detail
+5. Our Doctors
+6. Doctor Profile
+7. Book Appointment
+8. Contact Us
+9. Frequently Asked Questions
+10. Health Articles / Blog
+11. Patient Login / Register
+12. Privacy Policy
+13. Terms and Conditions
+
+All pages must have functional navigation, proper SEO metadata, and consistent design.
+
+## Homepage — cinematic premium experience
+
+### Hero section
+
+Build an unforgettable above-the-fold experience.
+
+The hero must include:
+
+- A sophisticated premium navigation bar
+- Clinic logo
+- Clear service navigation
+- Appointment CTA
+- Login / Patient Portal access
+- Large cinematic headline
+- Elegant supporting paragraph
+- Premium healthcare photography
+- Beautiful layered visual composition
+- Floating but meaningful appointment or service UI elements
+- A prominent Book Appointment button
+- Secondary Explore Our Services button
+
+Suggested headline:
+
+**Care Designed Around You.**
+
+Supporting text:
+
+"Experience modern healthcare where compassionate professionals, intelligent technology, and exceptional service come together."
+
+Use an advanced asymmetric or split editorial hero composition.
+
+The medical imagery must be high quality, tasteful, and credible.
+
+Do not generate fake real-clinic credentials or imply that fictional doctors are verified professionals.
+
+### Remaining homepage sections
+
+Design sophisticated sections for:
+
+**Our Specialties**
+An elegant grid featuring multiple configurable medical categories.
+
+**Why Choose Aurelia**
+Highlight convenience, personalized care, professional service, and modern facilities.
+
+**Meet Our Specialists**
+Beautiful premium profile cards, doctor information, specialties, and booking access.
+
+**How Your Visit Works**
+A stylish interactive three-to-four-step journey.
+
+**Digital Patient Experience**
+Introduce the patient portal, online scheduling, and appointment management.
+
+**Clinic Experience**
+Premium imagery and a visually interesting facility showcase.
+
+**Patient Testimonials**
+Display approved real testimonials when available. Use clearly identified demo content during development, never fabricated reviews presented as genuine.
+
+**FAQ**
+Beautiful expandable accordion.
+
+**Final Conversion Section**
+A visually striking blue section with a strong booking CTA.
+
+**Footer**
+Complete professional footer, business details, navigation, social links, privacy links, and contact information.
+
+Every section should be visually intentional.
+
+No repeated generic card grids across the entire page.
+
+---
+
+# 5. ADVANCED APPOINTMENT BOOKING SYSTEM
+
+Build a real, end-to-end booking engine integrated with Supabase.
+
+Patient booking flow:
+
+Step 1 — Select service or specialty.
+
+Step 2 — Select doctor or choose first available doctor.
+
+Step 3 — Select appointment date.
+
+Step 4 — Display actual available time slots.
+
+Step 5 — Enter patient information or continue with an existing account.
+
+Step 6 — Review booking details.
+
+Step 7 — Confirm the appointment.
+
+Step 8 — Show confirmation, appointment reference, and status.
+
+Booking interface requirements:
+
+- Elegant multistep interface
+- Modern interactive calendar
+- Real-time availability
+- Doctor-specific schedules
+- Service-specific appointment duration
+- Configurable working hours
+- Configurable breaks and days off
+- Appointment capacity rules
+- Blocked holidays and unavailable dates
+- Clear confirmation screen
+- Booking status tracking
+- Cancellation and rescheduling rules
+- Patient booking history
+- Optional appointment notes
+- Staff-controlled approval settings
+- Appointment reminders framework
+- Waitlist capability
+
+Prevent double bookings using database-level constraints or transactional scheduling logic.
+
+Availability must be generated from real working schedules and existing appointments.
+
+Store timestamps consistently and display them using the clinic's configured time zone. Use Asia/Amman as the initial demonstration time zone.
+
+Supported appointment statuses:
+
+- Pending
+- Confirmed
+- Checked In
+- In Progress
+- Completed
+- Cancelled
+- No Show
+
+Guest booking requests may be supported, but require appropriate verification or staff confirmation and abuse protection.
+
+Do not create fake appointment success screens without actual database persistence.
+
+---
+
+# 6. INTELLIGENT WEBSITE AI CHATBOT
+
+Build a sophisticated, beautifully designed AI assistant embedded throughout the public website.
+
+This is a **clinic information and booking assistant**, not an AI doctor.
+
+The AI assistant must understand the entire clinic website and its operational information.
+
+## AI knowledge sources
+
+The assistant must use approved, up-to-date information from Supabase, including:
+
+- Clinic information
+- Website pages
+- Published services
+- Service descriptions
+- Doctors and their specialties
+- Clinic branches
+- Business hours
+- Booking instructions
+- Supported administrative policies
+- FAQ content
+- General pricing information when published
+- Contact information
+- Appointment procedures
+
+Use a grounded AI architecture or lightweight retrieval system where appropriate.
+
+Keep the assistant synchronized with CMS changes.
+
+When website information changes, the assistant must be able to use the updated data rather than relying only on hardcoded answers.
+
+## AI capabilities
+
+The chatbot should:
+
+- Greet visitors naturally.
+- Answer questions about the clinic.
+- Explain available services using approved website content.
+- Help users discover the right administrative service category.
+- Explain appointment booking procedures.
+- Guide visitors to relevant pages.
+- Provide clinic opening hours.
+- Explain cancellation and rescheduling policies.
+- Show doctor profiles and published availability.
+- Help visitors begin booking through a secure booking interface.
+- Escalate uncertain requests to reception.
+- Offer relevant navigation links or booking actions.
+
+Example conversation:
+
+User: "Do you have appointments this Thursday?"
+
+Assistant: "Of course! Which service are you interested in? I can help you check the available appointments."
+
+The assistant should check actual availability through a secure backend tool, not invent time slots.
+
+## STRICT MEDICAL SAFETY BOUNDARY
+
+The chatbot must NEVER:
+
+- Diagnose illnesses
+- Recommend medication
+- Prescribe treatments
+- Interpret clinical test results
+- Provide medical treatment plans
+- Recommend dosages
+- Present itself as a licensed doctor
+- Replace professional medical consultation
+
+If asked medical questions, explain politely that the assistant only provides clinic information and appointment assistance.
+
+For emergencies or potentially urgent situations, direct the visitor to appropriate emergency services rather than attempting medical triage.
+
+The assistant must not imply that an unavailable service or doctor exists.
+
+## AI interface
+
+Create a premium floating chat experience featuring:
+
+- Elegant assistant avatar
+- Blue-and-white conversation panel
+- Smooth open / close transitions
+- Suggested quick questions
+- Interactive booking suggestions
+- Relevant page links
+- Typing/loading feedback
+- Mobile-responsive conversation layout
+- Graceful error handling
+
+Store chat sessions and messages securely in Supabase when appropriate and with clear privacy controls.
+
+Do not expose other users' private conversations.
+
+Use an AI provider through a secure backend endpoint.
+
+If an API key is unavailable, provide clearly labeled limited FAQ functionality; never pretend AI integration is active.
+
+---
+
+# 7. COMPLETE CLINIC CRM SYSTEM
+
+This is a major part of the project.
+
+Build a functional internal CRM that clinic management and reception staff can use every day.
+
+The CRM must feel like a real premium SaaS product, not an afterthought.
+
+## CRM dashboard
+
+Create a beautiful overview including:
+
+- Total patients
+- New patient registrations
+- Upcoming appointments
+- Today's appointments
+- Pending confirmations
+- Completed appointments
+- Missed appointments
+- New inquiries
+- Booking conversion metrics
+- Reception tasks
+- Recent CRM activity
+- Weekly booking charts
+- Service popularity
+- Doctor appointment utilization
+
+Use real Supabase queries, not static numbers.
+
+## Patient management
+
+Provide a searchable patient directory.
+
+Patient profiles should include:
+
+- Name
+- Email
+- Phone
+- Registration date
+- Appointment history
+- Upcoming bookings
+- Preferred communication method
+- Administrative notes
+- CRM tags
+- Communication history
+- Status and assigned staff member
+
+Build add, edit, search, filter, and authorized data-management operations.
+
+Limit this CRM to administrative and scheduling information. Do not introduce clinical records, diagnoses, prescriptions, or medical charts into the CRM.
+
+## Lead and inquiry management
+
+Support visitors who contact the clinic before becoming patients.
+
+Lead pipeline statuses:
+
+- New Inquiry
+- Contacted
+- Interested
+- Appointment Requested
+- Appointment Booked
+- Converted
+- Closed
+
+Include a visual Kanban pipeline with drag-and-drop, persistent updates, lead assignment, follow-up tasks, and internal activity history.
+
+## Internal staff tasks
+
+Allow authorized staff to:
+
+- Assign follow-ups
+- Set due dates
+- Record internal administrative notes
+- Mark tasks complete
+- Filter overdue tasks
+- Track assigned work
+
+## CRM communications
+
+Support:
+
+- Contact form inquiries
+- Appointment-related communication records
+- Internal staff notes
+- Notification templates
+- Consent-aware communication preferences
+
+Prepare integration-ready email and messaging architecture.
+
+Only send real email or SMS after the necessary provider credentials are configured.
+
+Do not claim a reminder was delivered unless the provider confirms success.
+
+---
+
+# 8. ADMIN AND STAFF OPERATIONS DASHBOARD
+
+Build a separate, secure, premium management application under routes such as:
+
+`/dashboard`
+
+It must have:
+
+- Beautiful collapsible sidebar
+- Top navigation and global search
+- Role-aware navigation
+- Profile menu
+- Notifications
+- Analytics cards
+- Interactive operational tables
+- Calendar views
+- Advanced filters
+- Modal dialogs
+- Skeleton loaders
+- Action confirmation dialogs
+- Empty states
+- Permission-aware actions
+
+## Required modules
+
+**Overview:** Key performance indicators and activity.
+
+**Appointment Management:** Full appointment table, filtering, manual bookings, calendar views, confirmation, cancellation, check-in, and rescheduling.
+
+**Patients:** CRM patient directory and patient profiles.
+
+**Leads:** Inquiry and lead pipeline management.
+
+**Doctors:** Profiles, specialties, working schedules, and availability.
+
+**Services:** Create, edit, archive, and categorize clinic services.
+
+**Staff Management:** Role assignments and access control.
+
+**Tasks:** Staff follow-ups and operational tasks.
+
+**Analytics:** Appointment trends, cancellations, conversion, new patients, service popularity, and utilization.
+
+**Website CMS:** Manage public website content.
+
+**AI Knowledge Center:** Manage approved chatbot knowledge and FAQ entries.
+
+**Settings:** Clinic information, booking rules, contact data, working hours, and branding.
+
+**Audit Log:** Record sensitive administrative actions.
+
+Dashboard screens must work with real data.
+
+Create/update/delete operations must validate inputs, persist results in Supabase, and update relevant UI state.
+
+---
+
+# 9. DOCTOR PORTAL
+
+Provide a dedicated doctor-facing experience.
+
+Authorized doctors should be able to:
+
+- View their daily appointments
+- View their weekly calendar
+- See necessary patient contact and scheduling information
+- Review appointment status
+- Manage availability exceptions
+- Request schedule changes
+- View upcoming appointments
+- Mark workflow statuses when permitted
+
+Doctors must not automatically gain access to other doctors' private schedules or unrestricted clinic CRM data.
+
+Use authorization policies rather than simply hiding navigation elements.
+
+---
+
+# 10. PATIENT PORTAL
+
+Build a premium patient account experience.
+
+Patients should be able to:
+
+- Register and log in securely
+- Update their basic profile
+- View upcoming appointments
+- View previous appointments
+- Request or perform rescheduling within policy
+- Cancel bookings according to clinic rules
+- Book new appointments
+- See booking confirmations
+- Manage notification preferences
+- View relevant administrative announcements
+- Contact reception
+
+Design the portal as a simplified, welcoming personal dashboard.
+
+Do not expose another patient's data.
+
+The patient portal should look cohesive with the public brand but have its own polished application-style interface.
+
+---
+
+# 11. CONTENT MANAGEMENT SYSTEM
+
+The public website should be manageable without editing source code.
+
+Create admin interfaces for:
+
+- Clinic name and branding
+- Hero headline and description
+- Homepage sections
+- Services and specialties
+- Doctor biographies and profile photos
+- Contact information
+- Clinic opening hours
+- FAQ entries
+- Blog articles
+- Approved testimonials
+- Footer content
+- SEO titles and descriptions
+- Basic website announcements
+
+Store configurable content in Supabase.
+
+Publishing changes should update the public website.
+
+The AI chatbot should use the latest published, approved information.
+
+---
+
+# 12. BILINGUAL EXPERIENCE
+
+Support English and Arabic.
+
+Implement proper:
+
+- LTR for English
+- RTL for Arabic
+- Language switcher
+- Translated navigation
+- Translated forms
+- Translated booking steps
+- Translated dashboards where practical
+- Correct Arabic typography
+- Direction-aware layouts
+
+Do not implement Arabic by merely changing text alignment.
+
+The layout must be genuinely RTL-compatible.
+
+Use English as the initial default with an easily accessible Arabic switcher.
+
+Prepare realistic Jordan-oriented demo settings using JOD currency and Asia/Amman time zone, while keeping them configurable.
+
+---
+
+# 13. DATABASE ARCHITECTURE
+
+Design a clean, relational Supabase PostgreSQL schema.
+
+Include tables or equivalent normalized entities for:
+
+- Clinic settings
+- Branches
+- User profiles
+- Staff accounts and roles
+- Doctors
+- Specialties
+- Services
+- Doctor-service relationships
+- Working schedules
+- Schedule exceptions
+- Appointments
+- Patients
+- CRM leads
+- CRM interactions
+- CRM notes
+- CRM tasks
+- CRM tags
+- Contact inquiries
+- Notification preferences
+- Notification delivery logs
+- Website content
+- FAQ knowledge entries
+- Blog posts
+- Approved testimonials
+- AI chat sessions
+- AI chat messages
+- Audit logs
+- Patient consent records
+
+Provide foreign keys, indexes, sensible constraints, timestamps, and status validations.
+
+Where appropriate, use database transactions, uniqueness constraints, and concurrency-safe operations.
+
+Implement RLS on sensitive tables.
+
+Use least-privilege access.
+
+Do not store account passwords in custom database tables.
+
+Use Supabase Auth for identity management.
+
+Prepare secure storage policies for uploaded media.
+
+Generate reproducible SQL migrations.
+
+Do not create a database structure that is disconnected from the frontend.
+
+---
+
+# 14. SECURITY AND PRIVACY
+
+Implement serious baseline security practices.
+
+Requirements:
+
+- Supabase Auth
+- Role-based access control
+- Proper server-side authorization
+- RLS policies
+- Input validation
+- Secure sessions
+- Protected dashboards
+- Protected admin API routes
+- Rate limiting for public forms and sensitive actions
+- Basic bot/spam protection
+- No secrets in client bundles
+- No unrestricted service-role exposure
+- Minimal collection of patient data
+- Audit trails for administrative changes
+- Safe error responses
+- Consent-aware communication preferences
+- Secure file upload constraints
+- Strong separation between public content and private CRM information
+
+Roles:
+
+- Super Admin
+- Clinic Admin
+- Receptionist
+- Doctor
+- Patient
+
+Do not treat this application as automatically compliant with HIPAA, GDPR, Jordanian privacy law, or any healthcare regulation.
+
+Build with privacy-conscious architecture and clearly document any additional legal, security, and operational review required before use with real patients.
+
+Use synthetic demonstration data only.
+
+---
+
+# 15. RECOMMENDED TECH STACK
+
+Use a modern, stable, maintainable TypeScript-based architecture supported by Replit.
+
+Preferred:
+
+Frontend:
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui or thoughtfully customized Radix primitives
+- Framer Motion / Motion
+- Lucide icons
+- TanStack Query
+- React Hook Form
+- Zod
+- Recharts
+- A polished calendar component
+
+Backend:
+- Node.js
+- TypeScript
+- Express or an equivalent stable server framework
+- Secure REST API or typed endpoints
+- Zod validation
+
+Database:
+- Supabase PostgreSQL
+- Supabase Auth
+- Supabase Storage
+- Supabase RLS
+
+AI:
+- Secure LLM provider integration
+- Grounded knowledge retrieval
+- Restricted function/tool calling
+- No medical advice
+- No unrestricted database access from the model
+
+Use a clean modular project structure separating public pages, dashboards, reusable design-system components, business logic, API services, authentication, booking logic, CRM logic, and database integrations.
+
+Avoid introducing unnecessary infrastructure dependencies.
+
+---
+
+# 16. VISUAL EXCELLENCE REQUIREMENTS
+
+The design quality is just as important as functionality.
+
+I want a website that immediately makes a visitor think:
+
+"This is a premium healthcare company with a serious technology platform."
+
+Avoid:
+
+- Generic template layouts
+- Repeated cards everywhere
+- Generic blue buttons without styling
+- Stock dashboard boilerplate
+- Placeholder charts
+- Inconsistent spacing
+- Overused emoji icons
+- Excessive gradients
+- Random decorative circles
+- Poor typography
+- Unpolished forms
+- Dense and outdated dashboards
+- Fake functionality
+
+Instead, create a unique visual design system.
+
+The homepage must have exceptional art direction.
+
+The booking experience should feel elegant and effortless.
+
+The CRM must feel like a modern professional SaaS.
+
+The patient portal must feel welcoming and simple.
+
+The chatbot must feel like a thoughtfully integrated product feature.
+
+Pay special attention to:
+
+- Microtypography
+- Spacing
+- Button sizing
+- Visual hierarchy
+- Icon consistency
+- Background transitions
+- Elegant border treatments
+- Mobile responsiveness
+- Table readability
+- Form states
+- Loading states
+- Empty states
+- Accessible contrast
+
+**DO NOT sacrifice visual quality just because the application contains many features.**
+
+---
+
+# 17. REAL FUNCTIONALITY, NOT A FAKE DEMO
+
+This is another non-negotiable requirement.
+
+Do not build a beautiful interface with disconnected actions.
+
+Every visible functional control should either work or be clearly identified as unavailable.
+
+Examples:
+
+- Booking must create an actual appointment record.
+- Cancellation must update the appointment status.
+- Calendar availability must reflect saved bookings.
+- CRM lead changes must persist.
+- Doctor changes must update relevant public pages.
+- Staff dashboard statistics must derive from actual records.
+- The website contact form must save inquiries.
+- Patient login must use Supabase Auth.
+- Role permissions must be enforced on the backend.
+- The chatbot must use approved clinic information.
+
+Do not fill the dashboard with random hardcoded statistics.
+
+Do not build fake notifications that imply messages were delivered.
+
+Do not use browser localStorage as the primary system of record.
+
+For demonstration purposes, create clearly labeled, realistic synthetic seed data, including doctors, specialties, services, appointments, leads, and CRM activity.
+
+Make sure demo records are distinguishable from real production data.
+
+---
+
+# 18. REQUIRED IMPLEMENTATION STRATEGY
+
+Do not spend the entire execution budget creating a beautiful homepage and leaving the backend unfinished.
+
+Implement the project in a coherent sequence:
+
+**Phase 1 — Foundation**
+
+Set up project architecture, routing, dependencies, global design system, Supabase configuration, database migrations, authentication, and core permissions.
+
+**Phase 2 — Premium Public Website**
+
+Implement the complete visual identity, homepage, navigation, public pages, responsive design, and core CMS content integration.
+
+**Phase 3 — Booking Engine**
+
+Implement doctor schedules, availability computation, appointment creation, cancellation/rescheduling, and confirmation flows.
+
+**Phase 4 — CRM and Clinic Dashboard**
+
+Implement management pages, patient directory, lead pipeline, operational calendar, staff tasks, analytics, and administrative actions.
+
+**Phase 5 — Portals and AI**
+
+Implement the doctor portal, patient portal, website-aware chatbot, and secure knowledge retrieval.
+
+**Phase 6 — Integration and Quality**
+
+Connect all modules, add validation, loading/error states, permissions, test coverage, and polish the visual details.
+
+Continue implementing the product rather than stopping after a design specification.
+
+If a dependency requires an external credential or manual setup, implement the integration-ready code and report the precise missing configuration.
+
+Do not silently invent a working external service.
+
+Prioritize complete core workflows over dozens of incomplete features.
+
+---
+
+# 19. TESTING AND ACCEPTANCE CRITERIA
+
+Validate at least these complete workflows:
+
+1. New patient registers, logs in, and books an appointment.
+2. Appointment is persisted to Supabase and visible to authorized reception staff.
+3. Two users cannot book the same exclusive doctor time slot.
+4. Receptionist confirms or reschedules an appointment.
+5. Patient sees the updated appointment status.
+6. Doctor sees the appointment on their schedule.
+7. Public inquiry enters the CRM.
+8. Receptionist updates a lead and creates a follow-up task.
+9. Administrator publishes a new FAQ or changes clinic hours.
+10. Public website reflects the updated published content.
+11. Chatbot answers using the approved updated clinic information.
+12. Chatbot refuses to provide diagnosis, medication advice, or treatment plans.
+13. Patient cannot access another patient's records.
+14. Receptionist cannot access super-admin-only functions.
+15. Arabic layouts render correctly in RTL.
+16. Mobile booking and navigation are fully usable.
+
+Also ensure:
+
+- Successful production build
+- No TypeScript compilation errors
+- No broken navigation
+- No dead CTA buttons
+- No exposed secrets
+- Responsive layouts
+- Database migrations available
+- Safe empty states
+- Clear setup documentation
+
+---
+
+# 20. FINAL PRODUCT EXPERIENCE
+
+Imagine this visitor journey:
+
+A visitor opens the website.
+
+They see an incredibly premium blue-and-white healthcare experience with elegant typography, beautiful imagery, and polished animations.
+
+They explore services and discover the clinic's specialists.
+
+They ask the AI assistant about clinic opening hours and available services.
+
+The assistant understands the website and helps them navigate.
+
+They click "Book Appointment."
+
+A beautifully designed multistep booking interface opens.
+
+They choose a service, a doctor, and an actual available time slot.
+
+They confirm the appointment.
+
+The booking appears immediately in the clinic's operations dashboard.
+
+Reception staff can manage it through the CRM.
+
+The doctor can view the relevant appointment.
+
+The patient can log in later and manage the booking.
+
+The clinic owner can view activity, appointments, leads, and operational insights.
+
+Everything runs on a unified Supabase-backed architecture.
+
+Every interaction is consistent, beautiful, secure, and meaningful.
+
+## FINAL CREATIVE DIRECTIVE
+
+This must look and feel like a **$30,000+ custom healthcare digital platform**, not a $200 template.
+
+I expect outstanding visual hierarchy, distinctive composition, world-class UI craftsmanship, smooth UX, and functional full-stack integration.
+
+Spend real attention on the hero, booking flow, dashboard, and overall visual system.
+
+**Use blue and white as the dominant visual identity.**
+
+**Use Supabase for the database and authentication. Never Clerk.**
+
+**Deliver a real, connected, premium clinic management ecosystem.**
+
+Begin building the application now.

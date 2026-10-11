@@ -1,45 +1,47 @@
-# [Project name]
+# Aurelia Clinic
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Premium English/Arabic general-healthcare website with appointment scheduling, patient and doctor portals, and administrative clinic CRM.
 
-## Run & Operate
+## Standing product requirements
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- Use **Supabase exclusively** for PostgreSQL, authentication and uploaded media. Never introduce Clerk, Replit Auth, Replit's database, Neon, SQLite, or localStorage persistence.
+- Administrative and scheduling data only: no medical records, diagnoses, prescriptions or clinical charts.
+- The assistant provides clinic information and booking guidance, never medical advice or emergency triage.
+- Default locale English; real Arabic RTL support. Initial configurable currency JOD and time zone Asia/Amman.
+- Blue/white visual identity: navy `#102D69`, royal `#1263DF`, accent `#1686FF`, ice `#EAF5FF`, pearl `#F7FAFE`.
+- Do not invent appointment success, delivered notifications, verified doctors, authentic reviews or live metrics. Synthetic content must be distinguishable.
+- This application is not automatically compliant with healthcare or privacy laws. Legal/security/operational reviews are required before real-patient use.
 
-## Stack
+## Run
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Managed frontend workflow: `artifacts/aurelia-clinic: web`.
+- Managed API workflow: `artifacts/api-server: API Server`.
+- `pnpm run typecheck` checks all packages.
+- `pnpm --filter @workspace/api-spec run codegen` regenerates hooks and validators.
+- Build frontend with workflow-provided `PORT` and `BASE_PATH`; API build is `pnpm --filter @workspace/api-server run build`.
+- Never run `@workspace/db push`; that unused scaffold is not the clinic's database.
 
-## Where things live
+## Source of truth
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- API contract: `lib/api-spec/openapi.yaml`; generated clients/validators in `lib/api-client-react` and `lib/api-zod`.
+- Backend: `artifacts/api-server/src/routes`; Supabase configuration, role checks and cookies in `src/lib/supabase.ts`.
+- Management field validation: `artifacts/api-server/src/lib/resources.ts`.
+- Frontend: `artifacts/aurelia-clinic/src`; separate public, booking, account and management surfaces.
+- Supabase schema/RLS/transactional functions: `supabase/migrations/001_aurelia.sql`.
+- Optional public demonstration seed: `supabase/seed.sql`.
+- Setup and remaining live verification: `docs/SETUP.md`.
+
+## Configuration
+
+Required: `SUPABASE_URL`, `SUPABASE_ANON_KEY`. Public inquiry submission and account invitations additionally require server-only `SUPABASE_SERVICE_ROLE_KEY`.
+`APP_URL` is the approved application origin used in Supabase email flows. Obtain the published URL through the deployment tooling; do not guess it.
+Optional: `OPENAI_API_KEY`, `AI_MODEL` (defaults to `gpt-4o-mini`).
+Credentials belong in Secrets, never source control or client bundles.
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
-
-## Product
-
-_Describe the high-level user-facing capabilities of this app once they exist._
-
-## User preferences
-
-_Populate as you build — explicit user instructions worth remembering across sessions._
-
-## Gotchas
-
-_Populate as you build — sharp edges, "always run X before Y" rules._
-
-## Pointers
-
-- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+- Supabase user-scoped clients enforce RLS for private operations; the service-role client is restricted to invitation creation and validated public inquiry submission.
+- Authentication uses Supabase Auth with HttpOnly Secure cookies. No custom identity system or client-stored bearer tokens.
+- Booking and rescheduling run as database functions; an exclusion constraint prevents overlapping active appointments. Patient identity and duration are server-owned.
+- With no Supabase credentials, the public site uses explicit read-only illustrative content. Availability is empty and mutations fail, never simulated persistence.
+- Migrations are applied to the explicitly chosen external Supabase project, not by Replit Publish and never at application startup.
